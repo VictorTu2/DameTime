@@ -5,7 +5,7 @@ import datetime
 import matplotlib.pyplot as plt
 
 
-#combining all pbp csv files
+## combining all pbp csv files
 os.chdir("/Users/victortu/Desktop/Python Projects/DameTime/PBP csv files (newest)")
 
 extension = 'csv'
@@ -17,11 +17,11 @@ combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
 combined_csv.to_csv("combined_pbp_csv.csv", index=False, encoding='utf-8-sig')
 
 
-#reading combined csv files
+## reading combined csv files
 df = pd.read_csv("/Users/victortu/Desktop/Python Projects/DameTime/Generated csv files/combined_pbp_csv.csv")
 
 
-#filtering original csv for necessary player data
+## filtering original csv for necessary player data
 def playerfilter(df, team, playername):
     #filter POR away/home
     filtloc = df.loc[(df["AwayTeam"].str.contains(team)) | (df["HomeTeam"].str.contains(team))]
@@ -48,7 +48,7 @@ def playerfilter(df, team, playername):
     return(playerstats)
 
 
-#filtering playerstats for specific seasons
+# ## filtering playerstats for specific seasons
 
 #filtering for 2015-2016 season and generating csv file
 def filter16(df, filename):
@@ -141,7 +141,7 @@ def filter21(df, filename):
     return(playerstats21)
 
 
-#functions for analysis
+# ## functions for analysis
 
 #function for calculating 3-pt shot percentage
 def threeptcalc(df):
@@ -272,41 +272,35 @@ def main(df):
     print("DB 2%:" + str(booker216) + "," + str(booker217) + "," + str(booker218) + "," + str(booker219) + "," + str(booker220) + "," + str(booker221))
 
     #insert values into list
-    global dame3_list
-    global dame2_list
-    global curry3_list
-    global curry2_list
-    global booker3_list
-    global booker2_list
 
-    dame3_list = [dame316,dame317,dame318,dame319,dame320,dame321]
-    dame2_list = [dame216,dame217,dame218,dame219,dame220,dame221]
+    main.dame3_list = [dame316,dame317,dame318,dame319,dame320,dame321]
+    main.dame2_list = [dame216,dame217,dame218,dame219,dame220,dame221]
 
-    curry3_list = [curry316,curry317,curry318,curry319,curry320,curry321]
-    curry2_list = [curry216,curry217,curry218,curry219,curry220,curry221]
+    main.curry3_list = [curry316,curry317,curry318,curry319,curry320,curry321]
+    main.curry2_list = [curry216,curry217,curry218,curry219,curry220,curry221]
 
-    booker3_list = [booker316,booker317,booker318,booker319,booker320,booker321]
-    booker2_list = [booker216,booker217,booker218,booker219,booker220,booker221]
+    main.booker3_list = [booker316,booker317,booker318,booker319,booker320,booker321]
+    main.booker2_list = [booker216,booker217,booker218,booker219,booker220,booker221]
 
 
 main(df)
 
 
-#line charts
+## line charts
 
 #creating line chart for Damian Lillard
 
 #creating line chart for 3-pt
 season = [2016,2017,2018,2019,2020,2021]
 
-plt.plot(season, dame3_list, color = "red")
+plt.plot(season, main.dame3_list, color = "red")
 plt.title('DameTime from 3')
 plt.xlabel('Season (end)')
 plt.ylabel('3-Point Percentage')
 plt.show()
 
 #creating line chart for 2-pt
-plt.plot(season, dame2_list, color = "red")
+plt.plot(season, main.dame2_list, color = "red")
 plt.title('DameTime from 2')
 plt.xlabel('Season (end)')
 plt.ylabel('2-Point Percentage')
@@ -317,8 +311,8 @@ plt.show()
 #creating line chart for 3-pt
 season = [2016,2017,2018,2019,2020,2021]
 
-plt.plot(season, dame3_list, color = "red", label = "Dame")
-plt.plot(season, curry3_list, color = "blue", label = "Curry")
+plt.plot(season, main.dame3_list, color = "red", label = "Dame")
+plt.plot(season, main.curry3_list, color = "blue", label = "Curry")
 plt.legend(loc = "upper left")
 plt.title('Dame vs Curry from 3')
 plt.xlabel('Season (end)')
@@ -326,8 +320,8 @@ plt.ylabel('3-Point Percentage')
 plt.show()
 
 #creating line chart for 2-pt
-plt.plot(season, dame2_list, color = "red", label = "Dame")
-plt.plot(season, curry2_list, color = "blue", label = "Curry")
+plt.plot(season, main.dame2_list, color = "red", label = "Dame")
+plt.plot(season, main.curry2_list, color = "blue", label = "Curry")
 plt.legend(loc = "upper left")
 plt.title('Dame vs Curry from 2')
 plt.xlabel('Season (end)')
@@ -339,9 +333,9 @@ plt.show()
 #creating line chart for 3-pt
 season = [2016,2017,2018,2019,2020,2021]
 
-plt.plot(season, dame3_list, color = "red", label = "Dame")
-plt.plot(season, curry3_list, color = "blue", label = "Curry")
-plt.plot(season, booker3_list, color = "purple", label = "Booker")
+plt.plot(season, main.dame3_list, color = "red", label = "Dame")
+plt.plot(season, main.curry3_list, color = "blue", label = "Curry")
+plt.plot(season, main.booker3_list, color = "purple", label = "Booker")
 plt.legend(loc = "upper left")
 plt.title('Dame vs Curry vs Booker from 3')
 plt.xlabel('Season (end)')
@@ -349,9 +343,9 @@ plt.ylabel('3-Point Percentage')
 plt.show()
 
 #creating line chart for 2-pt
-plt.plot(season, dame2_list, color = "red", label = "Dame")
-plt.plot(season, curry2_list, color = "blue", label = "Curry")
-plt.plot(season, booker2_list, color = "purple", label = "Booker")
+plt.plot(season, main.dame2_list, color = "red", label = "Dame")
+plt.plot(season, main.curry2_list, color = "blue", label = "Curry")
+plt.plot(season, main.booker2_list, color = "purple", label = "Booker")
 plt.legend(loc = "upper left")
 plt.title('Dame vs Curry vs Booker from 2')
 plt.xlabel('Season (end)')
